@@ -1,11 +1,13 @@
 'use client'
 import Image from "next/image";
 import { Canvas} from "@react-three/fiber";
-import {Box} from "./keyboard/keyboard";
+import {Box} from "./keyboard/keyboardDisplay";
 import { OrbitControls, Sky } from "@react-three/drei";
 
 import React, { useEffect, useState } from "react";
-import { KeyboardLayout } from "./keyboard/core";
+import { KeyboardLayout,BasicKeyStroke,printKey} from "./keyboard/core";
+
+
 
 const loadLayout=(filename:string, setLayout:any)=>{
     fetch(filename).then(
@@ -23,24 +25,28 @@ const loadLayout=(filename:string, setLayout:any)=>{
 
 export default function Home() {
   const [layout,setLayout] = useState( new KeyboardLayout())
-
+  const key = new BasicKeyStroke("Q","@","")
+  console.log(key)
   useEffect(()=>{
     loadLayout("keyboardlayouts/nutymini.json",setLayout)
   },[])
+
+  const testKey = new BasicKeyStroke("A","@", "!")
+  printKey(testKey)
 
 
   return (
       <main className="flex flex-col gap-[0px] h-screen w-screen ">
       
-      <Canvas style={{
+      <Canvas id="mainview" style={{
         height: '50%',
       }} orthographic camera ={ {
             position:[0,0,80],
-            zoom:1,
-            left:layout.minX()-20,
-            right:layout.maxX()+20,
-            top:layout.maxY(),
-            bottom:layout.minY()
+            zoom:2.0,
+            //left:layout.minX()-20,
+            //right:layout.maxX()+20,
+            //top:layout.maxY(),
+            //bottom:layout.minY()
             }
         }
         >
