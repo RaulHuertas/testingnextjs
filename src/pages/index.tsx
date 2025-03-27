@@ -5,7 +5,7 @@ import {Box} from "./keyboard/keyboardDisplay";
 import { OrbitControls, Sky } from "@react-three/drei";
 
 import React, { useEffect, useState } from "react";
-import { KeyboardLayout,BasicKeyStroke,printKey} from "./keyboard/core";
+import { MultimediaKey, KeyboardLayout,BasicKeyStroke,printKey, MultimediaKeyStroke,HoldTap} from "./keyboard/core";
 
 
 
@@ -25,14 +25,21 @@ const loadLayout=(filename:string, setLayout:any)=>{
 
 export default function Home() {
   const [layout,setLayout] = useState( new KeyboardLayout())
-  const key = new BasicKeyStroke("Q","@","")
-  console.log(key)
+  const keyQ = new BasicKeyStroke("Q","@","")
+  printKey(keyQ)
+  const mute = new MultimediaKeyStroke(MultimediaKey.AUDIO_MUTE)
+  printKey(mute)
+  const holdTap = new HoldTap()
+  holdTap.onTapFunction = keyQ
+  holdTap.onHoldFunction = mute
+  printKey(holdTap)
+
+
+
   useEffect(()=>{
     loadLayout("keyboardlayouts/nutymini.json",setLayout)
   },[])
 
-  const testKey = new BasicKeyStroke("A","@", "!")
-  printKey(testKey)
 
 
   return (
