@@ -25,7 +25,7 @@ const loadLayout=(filename:string, setLayout:any)=>{
 
 export default function Home() {
   const [layout,setLayout] = useState( new KeyboardLayout())
-  const keyQ = new BasicKeyStroke("Q","@","")
+  const keyQ = new BasicKeyStroke("Q","@","","Q")
   printKey(keyQ)
   const mute = new MultimediaKeyStroke(MultimediaKey.AUDIO_MUTE)
   printKey(mute)
