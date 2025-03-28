@@ -25,12 +25,14 @@ import { FormControl, InputLabel } from "@mui/material";
 const loadLayout=(filename:string, setLayout:any)=>{
     fetch(filename).then(
       function(response){
+        console.log("response received")
         return response.json()
       }
     ).then(
       function(jsonData){ 
-          const newLayout = KeyboardLayout.fromJSON(jsonData.layout)
-          setLayout(newLayout)
+        const newLayout = KeyboardLayout.fromJSON(jsonData.layout)
+        setLayout(newLayout)
+        console.log("layout loaded")    
       }
     )
 
@@ -78,7 +80,10 @@ export default function Home() {
         <Box position={[ 9.5, 0, 0]} > </Box>
         {
           layout.keys.map((keyProps : Float32Array[],index:number) => {
-            return  <Box position={[keyProps[0],keyProps[1],0]} key={index}  ></Box>
+            return           <Box position={[keyProps[0],keyProps[1],0]} key={index}  
+                onClick={(e) => {console.log('click on key ${index}');console.log(e);console.log(index.toString())}} 
+            >
+            </Box>
           }) 
         }
       </Canvas>
@@ -101,7 +106,7 @@ export default function Home() {
                 sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                 style ={{backgroundColor: `rgb(${key.groupColor()[0]},${key.groupColor()[1]},${key.groupColor()[2]})`}} 
               >
-                <TableCell component="th" scope="row" width="80px">{index}</TableCell>
+                <TableCell component="th" scope="row" width="80px">{index+1}</TableCell>
                 <TableCell align="left"  width='100px' >{key.constructor.name}</TableCell>
                 <TableCell align="right">{key.mainChar()}</TableCell>
                 <TableCell align="right">{key.secondChar()}</TableCell>
