@@ -19,6 +19,9 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 
+import { NativeSelect } from "@mui/material/";
+import { FormControl, InputLabel } from "@mui/material";
+
 const loadLayout=(filename:string, setLayout:any)=>{
     fetch(filename).then(
       function(response){
@@ -35,31 +38,30 @@ const loadLayout=(filename:string, setLayout:any)=>{
 
 export default function Home() {
   const [layout,setLayout] = useState( new KeyboardLayout())
-  const keyQ = new BasicKeyStroke("Q","@","","Q")
-  printKey(keyQ)
-  const mute = new MultimediaKeyStroke(MultimediaKey.AUDIO_MUTE)
-  printKey(mute)
-  const holdTap = new HoldTap()
-  holdTap.onTapFunction = keyQ
-  holdTap.onHoldFunction = mute
-  printKey(holdTap)
-
 
 
   useEffect(()=>{
     loadLayout("keyboardlayouts/nutymini.json",setLayout)
   },[])
 
-  const keymapItems = keyset_es.map((key : KeyDisplayFunction,index:number) => {
-      return <li key={index}>{key.mainChar()}</li>
-  })
-  //console.log(keymapItems) 
+  const keysetToUse = keyset_us
 
   return (
       <main className="flex flex-col gap-[0px] h-screen w-screen ">
-      
+      <h1 className="text-4xl text-center">Programador de teclado</h1>
+      <FormControl fullWidth>
+        <InputLabel>
+          Tipo de teclado:
+        </InputLabel>
+        <NativeSelect>
+          defaultValue={0}
+          <option value={0}>Latam</option>
+          <option value={1}>US</option>
+          <option value={2}>ES</option>
+        </NativeSelect> 
+      </FormControl>
       <Canvas id="mainview" style={{
-        height: '50%',
+        //height: '50%',
       }} orthographic camera ={ {
             position:[0,0,80],
             zoom:2.0,
@@ -82,34 +84,36 @@ export default function Home() {
       </Canvas>
 
       <TableContainer component={Paper}>
-        <Table sx={{ minWidth: 650 }} aria-label="keycodesTable">
+        <Table sx={{ minWidth: 650 }} aria-label="keycodesTable" stickyHeader>
           <TableHead>
             <TableRow>
               <TableCell>Key Index</TableCell>
+              <TableCell align="left" width='auto' size='small'>Type</TableCell>
               <TableCell align="right">Main Char</TableCell>
               <TableCell align="right">Second Char</TableCell>
               <TableCell align="right">Third Char</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
-            {keyset_es.map((key : KeyDisplayFunction,index:number) => (
+            {keysetToUse.map((key : KeyDisplayFunction,index:number) => (
               <TableRow
                 key={index}
                 sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                 style ={{backgroundColor: `rgb(${key.groupColor()[0]},${key.groupColor()[1]},${key.groupColor()[2]})`}} 
               >
-                <TableCell component="th" scope="row">
-                  {index}
-                </TableCell>
+                <TableCell component="th" scope="row" width="80px">{index}</TableCell>
+                <TableCell align="left"  width='100px' >{key.constructor.name}</TableCell>
                 <TableCell align="right">{key.mainChar()}</TableCell>
                 <TableCell align="right">{key.secondChar()}</TableCell>
                 <TableCell align="right">{key.thirdChar()}</TableCell>
+                
               </TableRow>
             ))}
           </TableBody>
 
         </Table>
       </TableContainer>
+
 
 
 

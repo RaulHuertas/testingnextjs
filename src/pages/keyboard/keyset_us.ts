@@ -8,8 +8,8 @@ export const keyset_us : Array<KeyDisplayFunction> = [
     new BasicKeyStroke("NO","","","NO"),
     new BasicKeyStroke("TRANSPARENT","","","TRNS"),
     new BasicKeyStroke("A","","","A"),
-    new BasicKeyStroke("Q","","@","Q"),
-    new BasicKeyStroke("E","","€","E"),
+    new BasicKeyStroke("Q","","","Q"),
+    new BasicKeyStroke("E","","","E"),
     //Multimedia keycodes
     new MultimediaKeyStroke(MultimediaKey.AUDIO_MUTE),
     new MultimediaKeyStroke(MultimediaKey.AUDIO_VOL_DOWN),

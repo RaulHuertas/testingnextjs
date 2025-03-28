@@ -287,4 +287,5 @@ export function printKey(key:KeyDisplayFunction):void{
     console.log("\tkmkKeyname: "+key.kmkKey())
 }
 
-//TODO: mouse keycodes
+export const keyset_none : Array<KeyDisplayFunction>  = []
+//TODO: mouse keycodes, layer navigation

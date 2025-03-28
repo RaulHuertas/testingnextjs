@@ -1,6 +1,4 @@
 import { KeyDisplayFunction,BasicKeyStroke,MultimediaKeyStroke,MultimediaKey,HoldTap } from "./core";   
-import { keyset_es } from "./keyset_es";
-import { keyset_latam } from "./keyset_latam";
 
 
 
@@ -11,7 +9,7 @@ export const keyset_latam : Array<KeyDisplayFunction> = [
     new BasicKeyStroke("TRANSPARENT","","","TRNS"),
     new BasicKeyStroke("A","","","A"),
     new BasicKeyStroke("Q","","@","Q"),
-    new BasicKeyStroke("E","","€","E"),
+    new BasicKeyStroke("E","","","E"),
     //Multimedia keycodes
     new MultimediaKeyStroke(MultimediaKey.AUDIO_MUTE),
     new MultimediaKeyStroke(MultimediaKey.AUDIO_VOL_DOWN),
