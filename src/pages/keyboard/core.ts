@@ -77,9 +77,9 @@ export class BasicKeyStroke implements KeyDisplayFunction{
     //INTERFACE IMPLEMENTATION
     groupColor(): Int32Array[]{
         const ret = new Int32Array(3);
-        ret[0]  = 0
-        ret[1]  = 0
-        ret[2]  = 0
+        ret[0]  = 215
+        ret[1]  = 215
+        ret[2]  = 215
         return ret
     }
     mainChar(): string {
@@ -95,20 +95,20 @@ export class BasicKeyStroke implements KeyDisplayFunction{
         const ret = new Int32Array(3);
         ret[0]  = 0
         ret[1]  = 0
-        ret[2]  = 255
+        ret[2]  = 0
         return ret
     }
     secondCharColor(): Int32Array[]{
         const ret = new Int32Array(3);
-        ret[0]  = 255
+        ret[0]  = 0
         ret[1]  = 0
-        ret[2]  = 0
+        ret[2]  = 255
         return ret
     }
     thirdCharColor(): Int32Array[]{
         const ret = new Int32Array(3);
-        ret[0]  = 0
-        ret[1]  = 255
+        ret[0]  = 255
+        ret[1]  = 0
         ret[2]  = 0
         return ret
     }
@@ -163,8 +163,8 @@ export class MultimediaKeyStroke implements KeyDisplayFunction{
     groupColor(): Int32Array[]{
         const ret = new Int32Array(3);
         ret[0]  = 0
-        ret[1]  = 20
-        ret[2]  = 128
+        ret[1]  = 100
+        ret[2]  = 218
         return ret
     }
     mainChar(): string {

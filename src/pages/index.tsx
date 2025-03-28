@@ -11,6 +11,14 @@ import {keyset_es} from "./keyboard/keyset_es";
 import {keyset_latam} from "./keyboard/keyset_latam"; 
 import {keyset_us} from "./keyboard/keyset_us";
 
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableCell from '@mui/material/TableCell';
+import TableContainer from '@mui/material/TableContainer';
+import TableHead from '@mui/material/TableHead';
+import TableRow from '@mui/material/TableRow';
+import Paper from '@mui/material/Paper';
+
 const loadLayout=(filename:string, setLayout:any)=>{
     fetch(filename).then(
       function(response){
@@ -72,9 +80,38 @@ export default function Home() {
           }) 
         }
       </Canvas>
-      <ul>
-        {keymapItems}
-      </ul>
+
+      <TableContainer component={Paper}>
+        <Table sx={{ minWidth: 650 }} aria-label="keycodesTable">
+          <TableHead>
+            <TableRow>
+              <TableCell>Key Index</TableCell>
+              <TableCell align="right">Main Char</TableCell>
+              <TableCell align="right">Second Char</TableCell>
+              <TableCell align="right">Third Char</TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {keyset_es.map((key : KeyDisplayFunction,index:number) => (
+              <TableRow
+                key={index}
+                sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                style ={{backgroundColor: `rgb(${key.groupColor()[0]},${key.groupColor()[1]},${key.groupColor()[2]})`}} 
+              >
+                <TableCell component="th" scope="row">
+                  {index}
+                </TableCell>
+                <TableCell align="right">{key.mainChar()}</TableCell>
+                <TableCell align="right">{key.secondChar()}</TableCell>
+                <TableCell align="right">{key.thirdChar()}</TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+
+        </Table>
+      </TableContainer>
+
+
 
       </main>
   );
