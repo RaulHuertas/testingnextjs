@@ -76,11 +76,11 @@ export default function Home() {
         >
         <ambientLight intensity={0.5}></ambientLight> 
         <Sky sunPosition={[100, 10, 100]}></Sky>
-        <Box position={[-9.5, 0, 0]} > </Box>
-        <Box position={[ 9.5, 0, 0]} > </Box>
+        <Box position={[-9.5, 0, 0]} color="#ff0000"> </Box>
+        <Box position={[ 9.5, 0, 0]} color="#00ff00"> </Box>
         {
           layout.keys.map((keyProps : Float32Array[],index:number) => {
-            return           <Box position={[keyProps[0],keyProps[1],0]} key={index}  
+            return           <Box position={[keyProps[0],keyProps[1],0]} key={index} color="#0000ff" 
                 onClick={(e) => {console.log('click on key ${index}');console.log(e);console.log(index.toString())}} 
             >
             </Box>
