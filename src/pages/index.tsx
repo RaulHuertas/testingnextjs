@@ -5,9 +5,11 @@ import {Box} from "./keyboard/keyboardDisplay";
 import { OrbitControls, Sky } from "@react-three/drei";
 
 import React, { useEffect, useState } from "react";
-import { MultimediaKey, KeyboardLayout,BasicKeyStroke,printKey, MultimediaKeyStroke,HoldTap} from "./keyboard/core";
+import { MultimediaKey, KeyboardLayout,BasicKeyStroke,printKey, MultimediaKeyStroke,HoldTap, KeyDisplayFunction} from "./keyboard/core";
 
-
+import {keyset_es} from "./keyboard/keyset_es";
+import {keyset_latam} from "./keyboard/keyset_latam"; 
+import {keyset_us} from "./keyboard/keyset_us";
 
 const loadLayout=(filename:string, setLayout:any)=>{
     fetch(filename).then(
@@ -40,7 +42,10 @@ export default function Home() {
     loadLayout("keyboardlayouts/nutymini.json",setLayout)
   },[])
 
-
+  const keymapItems = keyset_es.map((key : KeyDisplayFunction,index:number) => {
+      return <li key={index}>{key.mainChar()}</li>
+  })
+  //console.log(keymapItems) 
 
   return (
       <main className="flex flex-col gap-[0px] h-screen w-screen ">
@@ -67,6 +72,9 @@ export default function Home() {
           }) 
         }
       </Canvas>
+      <ul>
+        {keymapItems}
+      </ul>
 
       </main>
   );
