@@ -288,4 +288,24 @@ export function printKey(key:KeyDisplayFunction):void{
 }
 
 export const keyset_none : Array<KeyDisplayFunction>  = []
+
+
+export class KeySet {
+    string : name = ""
+
+    set :   Array<KeyDisplayFunction> = []
+    
+    constructor(name:string){
+        this.name = name
+    }
+
+    add(newKey : KeyDisplayFunction):void{
+        this.set.push(newKey)
+    }
+
+}
+
+
+
 //TODO: mouse keycodes, layer navigation
+//

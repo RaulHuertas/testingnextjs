@@ -21,7 +21,7 @@ import Paper from '@mui/material/Paper';
 import Button   from '@mui/material/Button';
 
 
-import { NativeSelect } from "@mui/material/";
+import { NativeSelect } from "@mui/material";
 import { FormControl, InputLabel } from "@mui/material";
 
 const loadLayout=(filename:string, setLayout:any)=>{
@@ -65,7 +65,7 @@ export default function Home() {
     loadLayout("keyboardlayouts/nutymini.json",setLayout)
   },[])
 
-  const keysetToUse = keyset_us
+  const keysetToUse = keyset_latam
 
   return (
       <main className="flex flex-col gap-[0px] h-screen w-screen ">
@@ -117,6 +117,9 @@ export default function Home() {
         }
       </Canvas>
 
+      <div> Modelo de teclado: {layout.name} </div>
+      <div> Juego de teclas: {keysetToUse.name} </div>
+
       <TableContainer component={Paper}>
         <Table sx={{ minWidth: 650 }} aria-label="keycodesTable" stickyHeader>
           <TableHead>
@@ -129,7 +132,7 @@ export default function Home() {
             </TableRow>
           </TableHead>
           <TableBody>
-            {keysetToUse.map((key : KeyDisplayFunction,index:number) => (
+            {keysetToUse.set.map((key : KeyDisplayFunction,index:number) => (
               <TableRow
                 key={index}
                 sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
