@@ -18,6 +18,8 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
+import Button   from '@mui/material/Button';
+
 
 import { NativeSelect } from "@mui/material/";
 import { FormControl, InputLabel } from "@mui/material";
@@ -35,6 +37,23 @@ const loadLayout=(filename:string, setLayout:any)=>{
         console.log("layout loaded")    
       }
     )
+
+}
+
+async function testFS(){
+    const dirSelected = await window.showDirectoryPicker({mode:"readwrite"})
+     
+    console.log(dirSelected)
+    for await (const entry of dirSelected.values()) {
+      console.log(entry.kind, entry.name);
+    }    
+
+
+
+    const fileHandle = await dirSelected.getFileHandle('test.txt', { create: true });
+    const writable = await fileHandle.createWritable();
+    await writable.write("Hello World");
+    await writable.close();
 
 }
 
@@ -62,6 +81,16 @@ export default function Home() {
           <option value={2}>ES</option>
         </NativeSelect> 
       </FormControl>
+
+      <Button variant="contained" color="primary" onClick={
+        (e)=>{
+            console.log("Button clicked")
+            console.log(e)
+            testFS()
+        }
+      }>
+                Test FS API
+      </Button>
       <Canvas id="mainview" style={{
         //height: '50%',
       }} orthographic camera ={ {
